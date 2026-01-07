@@ -18,7 +18,7 @@ class Callback(RemoteListener):
         log.flush()
 
     def event_power(self, charging: bool):
-        log.write(f"[{datetime.now}] Charging {charging}")
+        log.write(f"[{datetime.now}] Charging {charging}\n")
         log.flush()
 
     def event_button(self, button: int):
