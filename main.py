@@ -35,7 +35,7 @@ def handle_touchpad_event(data):
 
     sensi = 6
     x = data[0] * sensi
-    y = data[1] * - sensi * 2
+    y = int(data[1] * - sensi * 1.5)
     p = data[2]
 
     if not pointer_lock:
