@@ -84,8 +84,8 @@ def handle_button_event(button):
         return
 
     if button & SiriRemote.BUTTON_POWER:
-        pointer_lock = not hid_input.is_android_input()
-        hid_input.switch_uinput()
+        pointer_lock = hid_input.is_android_input()
+        hid_input.switch_uinput(pointer_lock)
 
     if button & SiriRemote.BUTTON_UP:
         hid_input.add_key(Input.KEY_UP)
@@ -140,4 +140,4 @@ if __name__ == '__main__':
             hid_input.close()
             exit()
         except:
-            time.sleep(5)
+            time.sleep(0.5)

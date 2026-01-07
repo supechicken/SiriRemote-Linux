@@ -62,8 +62,8 @@ class Input:
     def is_android_input(self):
         return self.__ui == self.__ui_list[0]
 
-    def switch_uinput(self):
-        if is_android_input():
+    def switch_uinput(self, win):
+        if win:
             self.__ui = self.__ui_list[1]
         else:
             self.__ui = self.__ui_list[0]
