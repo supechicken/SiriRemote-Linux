@@ -14,11 +14,11 @@ log = open('/tmp/siri-remote.log', 'w')
 
 class Callback(RemoteListener):
     def event_battery(self, percent: int):
-        log.write(f"[{datetime.now}] Battery {percent}%\n")
+        log.write(f"[{datetime.now()}] Battery {percent}%\n")
         log.flush()
 
     def event_power(self, charging: bool):
-        log.write(f"[{datetime.now}] Charging {charging}\n")
+        log.write(f"[{datetime.now()}] Charging {charging}\n")
         log.flush()
 
     def event_button(self, button: int):
