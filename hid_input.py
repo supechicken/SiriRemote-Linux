@@ -7,27 +7,26 @@ class Input:
     KEY_MUTE = e.KEY_MUTE
 
     KEY_PLAYPAUSE = e.KEY_PLAYPAUSE
-    KEY_NEXTSONG = e.KEY_NEXTSONG
-    KEY_PREVIOUSSONG = e.KEY_PREVIOUSSONG
+    KEY_HOME = e.KEY_HOME
+    KEY_BACK = e.KEY_BACK
 
     KEY_UP = e.KEY_UP
     KEY_DOWN = e.KEY_DOWN
     KEY_LEFT = e.KEY_LEFT
     KEY_RIGHT = e.KEY_RIGHT
-
-    KEY_SCREENLOCK = e.KEY_SCREENLOCK
+    KEY_ENTER = e.KEY_ENTER
 
     BTN_LEFT = e.BTN_LEFT
     BTN_RIGHT = e.BTN_RIGHT
 
     def __init__(self):
         cap = {e.EV_KEY: [self.KEY_VOLUMEUP, self.KEY_VOLUMEDOWN, self.KEY_MUTE,
-                          self.KEY_PLAYPAUSE, self.KEY_NEXTSONG, self.KEY_PREVIOUSSONG,
-                          self.KEY_UP, self.KEY_DOWN, self.KEY_LEFT, self.KEY_RIGHT,
-                          self.KEY_SCREENLOCK,
+                          self.KEY_PLAYPAUSE, self.KEY_HOME, self.KEY_BACK,
+                          self.KEY_UP, self.KEY_DOWN, self.KEY_LEFT, self.KEY_RIGHT, self.KEY_ENTER,
                           self.BTN_LEFT, self.BTN_RIGHT],
                e.EV_REL: [e.REL_X, e.REL_Y]}
-        self.__ui = UInput(cap, name='Siri Remote Wrapper')
+        self.__ui_list = [UInput(cap, name='Siri Remote Wrapper (Android TV)'), UInput(cap, name='Siri Remote Wrapper (Windows VM)')]
+        self.__ui = self.__ui_list[0]
 
         self.__new_keys = []
         self.__pressed_keys = []
@@ -59,6 +58,12 @@ class Input:
         self.__ui.write(e.EV_REL, e.REL_X, x)
         self.__ui.write(e.EV_REL, e.REL_Y, y)
         self.__ui.syn()
+
+    def switch_uinput(self):
+        if self.__ui == self.__ui_list[0]:
+            self.__ui = self.__ui_list[1]
+        else:
+            self.__ui = self.__ui_list[0]
 
     def close(self):
         self.__ui.close()
