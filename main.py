@@ -23,7 +23,7 @@ class Callback(RemoteListener):
 
 
 def disconnect_timer(event):
-    if not event.wait(30):
+    if not event.wait(1200):
         print('Disconnect!')
         os.system(f'bluetoothctl disconnect {mac}')
 
@@ -33,7 +33,7 @@ disconnThread = [None, None]
 def handle_touchpad_event(data):
     global disconnThread
 
-    sensi = 2
+    sensi = 4
     x = data[0] * sensi
     y = data[1] * - sensi * 2
     p = data[2]
@@ -77,22 +77,21 @@ def handle_button_event(button):
         disconnThread[1] = threading.Thread(target=disconnect_timer, args=(disconnThread[0],))
         disconnThread[1].start()
         return
-    elif button & SiriRemote.BUTTON_POWER:
+    elif button & SiriRemote.BUTTON_SIRI:
         pointer_lock = not pointer_lock
         return
 
-    if not pointer_lock:
-        if button & SiriRemote.BUTTON_UP:
-            hid_input.add_key(Input.KEY_UP)
+    if button & SiriRemote.BUTTON_UP:
+        hid_input.add_key(Input.KEY_UP)
 
-        if button & SiriRemote.BUTTON_DOWN:
-            hid_input.add_key(Input.KEY_DOWN)
+    if button & SiriRemote.BUTTON_DOWN:
+        hid_input.add_key(Input.KEY_DOWN)
 
-        if button & SiriRemote.BUTTON_LEFT:
-            hid_input.add_key(Input.KEY_LEFT)
+    if button & SiriRemote.BUTTON_LEFT:
+        hid_input.add_key(Input.KEY_LEFT)
 
-        if button & SiriRemote.BUTTON_RIGHT:
-            hid_input.add_key(Input.KEY_RIGHT)
+    if button & SiriRemote.BUTTON_RIGHT:
+        hid_input.add_key(Input.KEY_RIGHT)
 
     if button & SiriRemote.BUTTON_TOUCHPAD:
         if pointer_lock:
@@ -108,9 +107,6 @@ def handle_button_event(button):
 
     if button & SiriRemote.BUTTON_VOLUME_DOWN:
         hid_input.add_key(Input.KEY_VOLUMEDOWN)
-
-    if button & SiriRemote.BUTTON_SIRI:
-        hid_input.switch_uinput()
 
     if button & SiriRemote.BUTTON_BACK:
         hid_input.add_key(Input.KEY_BACK)

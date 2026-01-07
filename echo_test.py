@@ -1,20 +1,20 @@
 import sys
-
+from datetime import datetime
 from remote.remote import SiriRemote, RemoteListener
 
 
 class Callback(RemoteListener):
     def event_battery(self, percent: int):
-        print("Battery", percent)
+        print(f"[{datetime.now}] Battery", percent)
 
     def event_power(self, charging: bool):
-        print("Charging", charging)
+        print(f"[{datetime.now}] Charging", charging)
 
     def event_button(self, button: int):
-        print("Button", button)
+        print(f"[{datetime.now}] Button", button)
 
     def event_touchpad(self, data):
-        print("Touch", data)
+        print(f"[{datetime.now}] Touch", data)
 
 
 if __name__ == '__main__':
