@@ -23,9 +23,10 @@ class Callback(RemoteListener):
 
 
 def disconnect_timer(event):
-    if not event.wait(1200):
-        print('Disconnect!')
-        os.system(f'bluetoothctl disconnect {mac}')
+    pass
+    #if not event.wait(6000):
+    #    print('Disconnect!')
+    #    os.system(f'bluetoothctl disconnect {mac}')
 
 prevXY = [None, None]
 disconnThread = [None, None]
@@ -33,9 +34,9 @@ disconnThread = [None, None]
 def handle_touchpad_event(data):
     global disconnThread
 
-    sensi = 6
+    sensi = 4
     x = data[0] * sensi
-    y = int(data[1] * - sensi * 1.5)
+    y = data[1] * - sensi * 2
     p = data[2]
 
     if not pointer_lock:
@@ -80,6 +81,9 @@ def handle_button_event(button):
     elif button & SiriRemote.BUTTON_SIRI:
         pointer_lock = not pointer_lock
         return
+
+    if button & SiriRemote.BUTTON_POWER:
+        hid_input.switch_uinput()
 
     if button & SiriRemote.BUTTON_UP:
         hid_input.add_key(Input.KEY_UP)
