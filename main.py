@@ -9,12 +9,16 @@ hid_input = Input()
 mac = None
 pointer_lock = False
 
+log = open('/tmp/siri-remote.log', 'w')
+
 class Callback(RemoteListener):
     def event_battery(self, percent: int):
-        print("Battery", percent)
+        log.write(f"Battery {percent}%\n")
+        log.flush()
 
     def event_power(self, charging: bool):
-        print("Charging", charging)
+        log.write(f"Charging {charging}")
+        log.flush()
 
     def event_button(self, button: int):
         handle_button_event(button)
@@ -131,8 +135,6 @@ def handle_button_event(button):
 
 
 if __name__ == '__main__':
-    sys.stdout = open('/tmp/siri-remote.log', 'w')
-    sys.stderr = sys.stdout
     while True:
         try:
             if len(sys.argv) > 1:
