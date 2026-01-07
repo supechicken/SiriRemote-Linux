@@ -59,8 +59,11 @@ class Input:
         self.__ui.write(e.EV_REL, e.REL_Y, y)
         self.__ui.syn()
 
+    def is_android_input(self):
+        return self.__ui == self.__ui_list[0]
+
     def switch_uinput(self):
-        if self.__ui == self.__ui_list[0]:
+        if is_android_input():
             self.__ui = self.__ui_list[1]
         else:
             self.__ui = self.__ui_list[0]
