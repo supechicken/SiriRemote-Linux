@@ -131,6 +131,8 @@ def handle_button_event(button):
 
 
 if __name__ == '__main__':
+    sys.stdout = open('/tmp/siri-remote.log', 'w')
+    sys.stderr = sys.stdout
     while True:
         try:
             if len(sys.argv) > 1:
