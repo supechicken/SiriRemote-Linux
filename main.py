@@ -33,7 +33,7 @@ disconnThread = [None, None]
 def handle_touchpad_event(data):
     global disconnThread
 
-    sensi = 4
+    sensi = 6
     x = data[0] * sensi
     y = data[1] * - sensi * 2
     p = data[2]
