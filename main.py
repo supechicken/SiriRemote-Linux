@@ -1,6 +1,7 @@
 import sys
 import threading
 import os
+import time
 from remote.remote import SiriRemote, RemoteListener
 from hid_input import Input
 
@@ -126,12 +127,17 @@ def handle_button_event(button):
 
 
 if __name__ == '__main__':
-    try:
-        if len(sys.argv) > 1:
-            mac = sys.argv[1]
-            SiriRemote(mac, Callback())
-        else:
-            print("error: no mac address")
-    except KeyboardInterrupt:
-        hid_input.close()
-        exit()
+    while True:
+        try:
+            if len(sys.argv) > 1:
+                mac = sys.argv[1]
+                SiriRemote(mac, Callback())
+            else:
+                print("error: no mac address")
+
+            break
+        except KeyboardInterrupt:
+            hid_input.close()
+            exit()
+        except:
+            time.sleep(5)
