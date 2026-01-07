@@ -7,7 +7,7 @@ class Input:
     KEY_MUTE = e.KEY_MUTE
 
     KEY_PLAYPAUSE = e.KEY_PLAYPAUSE
-    KEY_HOME = e.KEY_HOME
+    KEY_HOMEPAGE = e.KEY_HOMEPAGE
     KEY_BACK = e.KEY_BACK
 
     KEY_UP = e.KEY_UP
@@ -21,7 +21,7 @@ class Input:
 
     def __init__(self):
         cap = {e.EV_KEY: [self.KEY_VOLUMEUP, self.KEY_VOLUMEDOWN, self.KEY_MUTE,
-                          self.KEY_PLAYPAUSE, self.KEY_HOME, self.KEY_BACK,
+                          self.KEY_PLAYPAUSE, self.KEY_HOMEPAGE, self.KEY_BACK,
                           self.KEY_UP, self.KEY_DOWN, self.KEY_LEFT, self.KEY_RIGHT, self.KEY_ENTER,
                           self.BTN_LEFT, self.BTN_RIGHT],
                e.EV_REL: [e.REL_X, e.REL_Y]}

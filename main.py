@@ -101,7 +101,7 @@ def handle_button_event(button):
             hid_input.add_key(Input.KEY_ENTER)
 
     if button & SiriRemote.BUTTON_HOME:
-        hid_input.add_key(Input.KEY_HOME)
+        hid_input.add_key(Input.KEY_HOMEPAGE)
 
     if button & SiriRemote.BUTTON_VOLUME_UP:
         hid_input.add_key(Input.KEY_VOLUMEUP)
