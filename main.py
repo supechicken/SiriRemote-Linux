@@ -101,7 +101,11 @@ def handle_button_event(button):
 
     if button & SiriRemote.BUTTON_TOUCHPAD:
         if pointer_lock:
+            pointer_lock = False
             hid_input.add_key(Input.BTN_LEFT)
+            hid_input.press()
+            time.sleep(0.1)
+            pointer_lock = True
         else:
             hid_input.add_key(Input.KEY_ENTER)
 
